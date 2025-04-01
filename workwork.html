@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приглашение</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Вы получили приглашение</h2>
+    <p>Примете ли вы участие?</p>
+
+    <button onclick="sendResponse('да')">Принять</button>
+    <button onclick="sendResponse('нет')">Отклонить</button>
+
+    <p id="message"></p>
+
+    <script>
+        function sendResponse(answer) {
+            // Ссылка на Google Form (измените на свою)
+            const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdA-uw7KkKob5eeXVFihCVYWjjpdNxNTc1Pb10zzCd8Tnh1-Q/formResponse";
+            const FIELD_KEY = "entry.199474701"; // Замените на свой ключ
+
+            // Создаём форму и отправляем данные
+            const formData = new FormData();
+            formData.append(FIELD_KEY, answer);
+
+            fetch(GOOGLE_FORM_URL, {
+                method: "POST",
+                body: formData,
+                mode: "no-cors" // Позволяет отправлять данные без ожидания ответа
+            });
+
+            // Показываем сообщение пользователю
+            document.getElementById("message").innerText = "Ваш ответ отправлен!";
+        }
+    </script>
+
+    
+
+</body>
+</html>
